@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="space-background">
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+        <div class="shooting-star" style="top: 20%; left: 10%;"></div>
+        <div class="shooting-star" style="top: 40%; left: 30%;"></div>
+        <div class="shooting-star" style="top: 60%; left: 50%;"></div>
+        <div class="shooting-star" style="top: 80%; left: 70%;"></div>
+    </div>
+    <header class="app-header">
+        <div class="logo-container">
+            <div class="earth-logo">
+                <div class="earth-continent"></div>
+                <div class="earth-continent"></div>
+                <div class="earth-continent"></div>
+            </div>
+            <h1 class="app-title">PLANet</h1>
+        </div>
+    </header>
+    <div id="app">
+        <nav class="feature-switcher">
+            <button class="nav-btn active" data-section="tasks">
+                <i class="fas fa-meteor menu-icon"></i>
+                Tasks
+            </button>
+            <button class="nav-btn" data-section="pomodoro">
+                <i class="fas fa-clock menu-icon"></i>
+                Pomodoro
+            </button>
+            <button class="nav-btn" data-section="calendar">
+                <i class="fas fa-calendar-alt menu-icon"></i>
+                Calendar
+            </button>
+            <button class="nav-btn" data-section="events">
+                <i class="fas fa-star menu-icon"></i>
+                Events
+            </button>
+            <button class="nav-btn" data-section="subjects">
+                <i class="fas fa-planet-ringed menu-icon"></i>
+                Subjects
+            </button>
+        </nav>
+
+        <main>
+            <section id="tasks" class="section active">
+                <h2><i class="fas fa-tasks section-icon"></i> Task Management</h2>
+                <form id="task-form" class="quick-add-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <i class="fas fa-pencil input-icon"></i>
+                            <input type="text" id="task-name" placeholder="Task Name" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-calendar input-icon"></i>
+                            <input type="date" id="task-date" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-clock input-icon"></i>
+                            <input type="time" id="task-time" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-flag input-icon"></i>
+                            <select id="task-priority" required>
+                                <option value="">Select Priority</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-exclamation-circle input-icon"></i>
+                            <select id="task-urgency" required>
+                                <option value="">Select Urgency</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Task
+                        </button>
+                    </div>
+                </form>
+                <div id="task-list" class="task-list"></div>
+            </section>
+
+            <section id="pomodoro" class="section">
+                <h2><i class="fas fa-hourglass-half section-icon"></i> Pomodoro Timer</h2>
+                <div class="timer-container">
+                    <div class="timer-display">25:00</div>
+                    <div class="timer-controls">
+                        <button id="start-timer" class="btn-primary">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button id="reset-timer" class="btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                    <div class="timer-modes">
+                        <button class="mode-btn active" data-time="25">Work</button>
+                        <button class="mode-btn" data-time="5">Short Break</button>
+                        <button class="mode-btn" data-time="15">Long Break</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="calendar" class="section">
+                <div class="calendar-wrapper">
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                            <h3 id="current-month"></h3>
+                            <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="weekdays">
+                            <div>Sunday</div>
+                            <div>Monday</div>
+                            <div>Tuesday</div>
+                            <div>Wednesday</div>
+                            <div>Thursday</div>
+                            <div>Friday</div>
+                            <div>Saturday</div>
+                        </div>
+                        <div id="calendar-days"></div>
+                    </div>
+                    <div id="day-details" style="display: none;"></div>
+                    <div class="notes-section">
+                        <h4>Month Notes</h4>
+                        <textarea id="month-notes" placeholder="Add notes for this month..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <section id="events" class="section">
+                <h2><i class="fas fa-star section-icon"></i>Events</h2>
+                <form id="event-form" class="form-grid">
+                    <input type="text" id="event-name" placeholder="Event Name" required>
+                    <input type="date" id="event-date" required>
+                    <input type="time" id="event-time" required>
+                    <input type="hidden" id="event-id">
+                    <button type="submit" class="btn-primary" id="event-submit">Add Event</button>
+                </form>
+                <div id="event-list"></div>
+            </section>
+
+            <section id="subjects" class="section">
+                <h2><i class="fas fa-book section-icon"></i>Subjects</h2>
+                <form id="subject-form" class="form-grid">
+                    <input type="text" id="subject-name" placeholder="Subject Name" required>
+                    <input type="color" id="subject-color" value="#4ECDC4">
+                    <input type="text" id="subject-courses" placeholder="Courses (comma-separated)">
+                    <div class="input-group">
+                        <label class="slider-label" for="subject-confidence">Confidence Level</label>
+                        <select id="subject-confidence">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="subject-completion">
+                        <label class="slider-label" for="subject-preparation">Subject Completion</label>
+                        <div class="slider-container">
+                            <span class="percentage-display"></span>
+                            <input type="range" id="subject-preparation" min="0" max="100" value="50" />
+                        </div>
+                    </div>
+                    <input type="hidden" id="subject-id">
+                    <button type="submit" class="btn-primary" id="subject-submit">Add Subject</button>
+                </form>
+                <div id="subject-list"></div>
+            </section>
+        </main>
+
+        <footer class="settings-panel">
+            <button id="settings-toggle" class="btn-secondary">Settings</button>
+            <div id="settings-content" class="settings-content hidden">
+                <div class="setting-item">
+                    <label for="pomodoro-duration">Default Pomodoro Duration (minutes)</label>
+                    <input type="number" id="pomodoro-duration" min="1" max="60" value="25">
+                </div>
+                <div class="setting-item">
+                    <label for="first-day">First Day of Week</label>
+                    <select id="first-day">
+                        <option value="0">Sunday</option>
+                        <option value="1">Monday</option>
+                    </select>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
